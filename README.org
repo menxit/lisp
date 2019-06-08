@@ -1,0 +1,45 @@
+* Lisp
+- Se in Lisp vuoi una nuova funzionalità nel linguaggio puoi aggiungerla.
+- Common Lisp è il discendente moderno di Lisp (di John McCarthy)
+- Lisp è un ottimo linguaggio per AI
+- [[https://github.com/roswell/roswell][roswell]] è un gestore di ambienti di sviluppo per lisp
+  - brew install sbcl :: per installare implementazione sbcl di lisp
+- (+ 2 3) :: tutte le parentesi hanno dentro 3 elementi
+
+** Hello, world
+#+BEGIN_SRC 
+(format t "hello, world")
+#+END_SRC
+
+- Come sempre 3 parametri.
+- format è la funzione che lisp usa per emettere output stout
+- t :: rappresenta dove deve emettere l'output, t rappresenta lo stdout
+- il risultato sarà "hello, world" NIL
+- NIL :: è il risultato della funzione format (una sorta di void)
+
+#+BEGIN_SRC 
+(defun helloworld () (format t "hello, world"))
+#+END_SRC
+
+** Plist (property list)
+#+BEGIN_SRC lisp
+(list 1 2 3)
+(list :a 1 :b 2 :c 10)
+#+END_SRC
+
+*** getf
+#+BEGIN_SRC lisp
+(getf (list :a 1 :b 3 :c 10) :c)
+>> 10
+#+END_SRC
+
+** variabile globale
+Le "*" sono una convenzione:
+#+BEGIN_SRC lisp
+(defvar *db* nil)
+#+END_SRC
+
+** push
+#+BEGIN_SRC 
+(push db (1 2 3))
+#+END_SRC
