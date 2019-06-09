@@ -40,18 +40,27 @@
 (defun prompt-add-cd ()
   (add-cd (prompt-for-cd)))
 
-(defun select-by-artist (artist)
-  (remove-if-not
-   #'(lambda (cd) (equal (getf cd :artist) artist))
-   *db*))
+(defun select (selector-fn)
+  (remove-if-not selector-fn *db*))
 
-(defun select-by-property (property value)
-  (remove-if-not
-   #'(lambda (cd) (equal (getf cd property) value)) *db*))
-
-(defun dump-sql (p)
-   (select-by-property (getf p :where) (getf p :equal)))
+(defun where (&key title artist rating (hd nil hd-p))
+  #'(lambda (cd)
+      (and
+       (if title    (equal (getf cd :title)  title)  t)
+       (if artist   (equal (getf cd :artist) artist) t)
+       (if rating   (equal (getf cd :rating) rating) t)
+       (if hd-p (equal (getf cd :hd) hd) t))))
 
 (defun add-cds ()
   (loop (prompt-add-cd)
      (if (not (y-or-n-p "Another? [y/n]: ")) (return))))
+
+(select (where :artist "hel"))
+
+(reverse '(1 2 3))
+
+(defun add-two-or-three-numbers(&key one two three)
+  (+ (if one one 0) (if two two 0) (if three three 0)))
+
+(add-two-or-three-numbers :one 1 :two 2)
+(add-two-or-three-numbers :one 1 :two 2 :three 10)

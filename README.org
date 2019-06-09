@@ -43,3 +43,8 @@ Le "*" sono una convenzione:
 #+BEGIN_SRC 
 (push db (1 2 3))
 #+END_SRC
+** funzione con parametri opzionali
+#+BEGIN_SRC lisp
+(defun add-two-or-three-numbers(&key one two three)
+  (if one one 0)+(if two two 0)+(if three three 0))
+#+END_SRC
